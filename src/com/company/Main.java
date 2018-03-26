@@ -11,49 +11,28 @@ public class Main {
 
     static  private   String balls_array []= {"W","W","W","W","W"};
     static  int conter = 0;
-    private static int answer;
-    ;
+    public static int answer = ThreadLocalRandom.current() .nextInt(5);
+    static int total_execution_times = 0;
+    static  int mean_of_times=0;
+    private static int mean;
+
     public static void main(String[] args) {
 	// write your code here
 
+        worker();
 
-      /*  final long timeInterval = 1000;
-        Runnable runnable = new Runnable() {
 
-            public void run() {
-                while (true) {
-                    // ------- code for task to run
-                    worker();
-                    // ------- ends here
-                    try {
-                        Thread.sleep(timeInterval);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        };
-
-        Thread thread = new Thread(runnable);
-        thread.start();
-    */
-
-      for (int i=0;i<100;i++) {
-               Random rn = new Random();
-               answer = rn.nextInt(5);
-              //System.out.println("Times executed: " + Integer.toString(answer));
-
-          worker();
-      }
 
     }
+
     private static  void worker(){
+        total_execution_times ++;
         while(!returnStatus()){
             conter ++;
 
 
 
-            //int answer = ThreadLocalRandom.current() .nextInt(5);
+            int answer = ThreadLocalRandom.current() .nextInt(5);
             //print();
             if(balls_array[answer].equals("W")){
                 balls_array[answer] = "B";
@@ -63,6 +42,21 @@ public class Main {
         }
         System.out.println("Times executed: " + Integer.toString(conter));
        // print();
+        mean_of_times += conter;
+        mean = mean_of_times/total_execution_times;
+        System.out.println("Mean of samples: " + Integer.toString(mean));
+        conter = 0;
+        if(returnStatus()){
+            for(int i=0;i<5;i++){
+                balls_array[i] = "W";
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            worker();
+        }
     }
     private static void  print(){
         for(int i = 0;i<5; i++){
