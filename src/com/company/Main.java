@@ -12,9 +12,9 @@ public class Main {
     static  private   String balls_array []= {"W","W","W","W","W"};
     static  int conter = 0;
     public static int answer = ThreadLocalRandom.current() .nextInt(5);
-    static int total_execution_times = 0;
-    static  int mean_of_times=0;
-    private static int mean;
+    static float total_execution_times = 0;
+    static  float mean_of_times=0;
+    private static float mean;
 
     public static void main(String[] args) {
 	// write your code here
@@ -44,7 +44,7 @@ public class Main {
        // print();
         mean_of_times += conter;
         mean = mean_of_times/total_execution_times;
-        System.out.println("Mean of samples: " + Integer.toString(mean));
+        System.out.println("Mean of samples: " + Float.toString(mean));
         conter = 0;
         if(returnStatus()){
             for(int i=0;i<5;i++){
